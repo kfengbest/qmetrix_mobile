@@ -1,0 +1,3 @@
+rootProject.name = 'qmetrix_mob'
+
+include ':app'
