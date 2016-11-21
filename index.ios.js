@@ -12,6 +12,8 @@ import {
   View
 } from 'react-native';
 
+import login from './src/page/login'
+
 export default class qmetrix_mob extends Component {
   render() {
     return (
@@ -26,6 +28,7 @@ export default class qmetrix_mob extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <login />
       </View>
     );
   }
