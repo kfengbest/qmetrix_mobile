@@ -9,7 +9,7 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
-import httpreq from '../service/getdata';
+import httpreq from '../service/qm-httputil';
 
 export default class ProfileView extends Component {
     _onPressButton() {

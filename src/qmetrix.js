@@ -14,29 +14,32 @@ import CookieManager from 'react-native-cookies'
 // import LoginApp from './pages/login/loginapp'
 import LoginApp from './pages/login/login-local'
 import MainTabs from './maintabs'
+import LoginApi from './service/qm-login'
 
 export default class MainView extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            loggedIn: (this.props.loginState && this.props.loginState.loggedIn) || false
+            loggedIn: LoginApi.isLoggedIn()
         };
     }
 
     logout () {
-        CookieManager.clearAll((err, res) => {
-            console.log(err);
-            console.log(res);
-        });
-
-        this.setState({
-            loggedIn: false,
-        });
+        LoginApi.logout();
+        this.setState({loggedIn: false});
+        // CookieManager.clearAll((err, res) => {
+        //     console.log(err);
+        //     console.log(res);
+        // });
+        //
+        // this.setState({
+        //     loggedIn: false,
+        // });
 
     }
 
     render () {
-        if(this.state.loggedIn) {
+        if(LoginApi.isLoggedIn()) {
             return (
                 <MainTabs />
             );
