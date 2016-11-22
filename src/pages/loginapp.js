@@ -31,8 +31,8 @@ export default class LoginApp extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            loggedIn: false,
-            loadedCookie: false
+            loggedIn: true,
+            loadedCookie: true
         };
     }
 
@@ -67,6 +67,10 @@ export default class LoginApp extends Component {
     render () {
         // If we have completed loading the cookie choose to show Login WebView or the LoginApp component, else just show an empty View.
         if(this.state.loadedCookie) {
+                return (
+                    <MainView loginState={this.state}/>
+                );
+
             if(this.state.loggedIn) {
                 // redir to main view now
                 return (

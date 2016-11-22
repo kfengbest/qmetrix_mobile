@@ -12,7 +12,7 @@ import {
 } from 'react-native'
 import CookieManager from 'react-native-cookies'
 import LoginApp from './pages/loginapp'
-import MyTabs from './maintabs'
+import MainTabs from './maintabs'
 
 export default class MainView extends Component {
     constructor (props) {
