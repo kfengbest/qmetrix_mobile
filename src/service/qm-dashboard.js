@@ -3,6 +3,7 @@
  * the qmetrix dashboard api service
  */
 
+import Global from './qm-global'
 import HttpUtil from './qm-httputil'
 
 var _dashboardUrl = Global.baseAPIUrl() + 'v2/dashboard/';

@@ -3,6 +3,7 @@
  * the qmetrix portfolio api service
  */
 
+import Global from './qm-global'
 import HttpUtil from './qm-httputil'
 
 var _pfoUrl = Global.baseAPIUrl() + 'v2/portfolio/';
