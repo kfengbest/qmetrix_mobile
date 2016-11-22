@@ -7,12 +7,21 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 
-import Qmetrix from './src/Qmetrix';
+import MainView from './src/page/main'
 
 export default class qmetrix_mob extends Component {
-    render() {
-        return (<Qmetrix />);
+    constructor (props) {
+        super(props);
+        // this.state = {
+        //     loggedIn: false
+        // };
     }
+
+    render() {
+    return (
+        <MainView />
+    );
+  }
 }
 
 AppRegistry.registerComponent('qmetrix_mob', () => qmetrix_mob);

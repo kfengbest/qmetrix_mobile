@@ -1,6 +1,7 @@
 package com.qmetrix_mob;
 
 import com.facebook.react.ReactActivity;
+import com.psykar.cookiemanager.CookieManagerPackage;
 
 public class MainActivity extends ReactActivity {
 
