@@ -11,7 +11,8 @@ import {
     Button
 } from 'react-native'
 import CookieManager from 'react-native-cookies'
-import LoginApp from './pages/loginapp'
+// import LoginApp from './pages/login/loginapp'
+import LoginApp from './pages/login/login-local'
 import MainTabs from './maintabs'
 
 export default class MainView extends Component {
