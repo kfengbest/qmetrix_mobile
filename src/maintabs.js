@@ -1,10 +1,11 @@
+
 /**
  * Created by macking on 22/11/2016.
  */
 import React, { Component, PropTypes } from 'react';
 import { Text, View, Navigator, TouchableHighlight } from 'react-native';
 
-export default class MyScene extends Component {
+export default class MainTabs extends Component {
     render() {
         return (
             <View>
@@ -20,7 +21,7 @@ export default class MyScene extends Component {
     }
 }
 
-MyScene.propTypes = {
+MainTabs.propTypes = {
     title: PropTypes.string.isRequired,
     onForward: PropTypes.func.isRequired,
     onBack: PropTypes.func.isRequired,
