@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 
-export default class Portfolio extends Component {
+export default class WidgetList extends Component {
 
   _onForward = () => {
     this.props.navigator.push({
