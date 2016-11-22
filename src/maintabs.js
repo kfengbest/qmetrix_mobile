@@ -23,7 +23,7 @@ class MyTabs extends React.Component {
   static displayName = 'QMetrix';
 
   state = {
-    selectedTab: 'redTab',
+    selectedTab: 'blueTab',
     notifCount: 0,
     presses: 0,
   };
