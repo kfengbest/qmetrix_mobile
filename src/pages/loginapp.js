@@ -11,7 +11,7 @@ import {
     WebView
 } from 'react-native';
 import CookieManager from 'react-native-cookies';
-import MainView from './main';
+import MainView from '../qmetrix';
 
 // Change to real urls when build and deploy, go ios/Info.plist to add HTTPS exceptions for staging
 const LOGIN_URL = "http://localhost:8000/login/";

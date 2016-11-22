@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 
-import MainView from './src/page/main'
+import MainView from './src/qmetrix'
 
 export default class qmetrix_mob extends Component {
     constructor (props) {
