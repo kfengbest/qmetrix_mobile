@@ -23,8 +23,12 @@ export default class DashboardsList extends Component {
   }
 
   _renderRow(data) {
+
     return (
-     <DashboardCell 
+     <DashboardCell
+        onPress={() => {
+              console.log("onselected");
+        }}      
         dashboard={data}
      />
     );

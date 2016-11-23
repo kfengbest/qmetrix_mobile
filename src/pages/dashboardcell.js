@@ -18,9 +18,13 @@ export default class DashboardCell extends Component {
   
   render() {
     return (
-      <View>
-        <Text>{this.props.dashboard}</Text>
-      </View>
+      <TouchableHighlight
+          onPress={this.props.onPress}
+      >
+        <View>
+          <Text>{this.props.dashboard}</Text>
+        </View>
+      </TouchableHighlight>
     )
   }
 }
