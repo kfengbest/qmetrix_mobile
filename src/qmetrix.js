@@ -8,7 +8,8 @@ import {
     StyleSheet,
     Text,
     View,
-    Button
+    Button,
+    Navigator
 } from 'react-native'
 import CookieManager from 'react-native-cookies'
 // import LoginApp from './pages/login/loginapp'
@@ -38,22 +39,28 @@ export default class MainView extends Component {
 
     }
 
+  router(route, nav){
+    switch(route.id){
+      case 'login':
+        return (
+          <LoginApp navigator={nav}/>
+        );
+      case 'tabsview':
+        return (
+          <MainTabs navigator={nav}/>
+        );
+      default:
+        return (<View />);
+    }
+  }
+
     render () {
-
-            return (
-                <MainTabs />
-            );
-
-        if(LoginApi.isLoggedIn()) {
-            return (
-                <MainTabs />
-            );
-        }
-        else {
-            return (
-                <LoginApp />
-            );
-        }
+        return (
+          <Navigator 
+            initialRoute={{id:'login'}}
+            renderScene={this.router}
+          />
+        );
 
     }
 }

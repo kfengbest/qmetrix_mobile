@@ -30,17 +30,23 @@ export default class LoginApp extends Component {
     }
 
     onLoginBtnClick () {
+
         console.log("logout pressed!");
         LoginApi.login(this.state.user, this.state.password).then((data) => {
             if(data.isLogin) {
                 console.log("login successful! welcome ", data.userDisplayName);
                 this.setState({loginOk: true});
+
+
             } else {
                 console.log("login failed! check again please, ", data.userAccount);
             }
         }).catch((error) => {
             console.log("login error: ", error);
         });
+
+        this.props.navigator.replace({id:'tabsview'});
+
     }
 
     render () {

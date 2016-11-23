@@ -16,16 +16,19 @@ import httpreq from '../service/qm-httputil';
 import _loginState from '../service/qm-login';
 import LoginApp from '../pages/login/login-local';
 
-const _onPressLogout = () => {
-    _logout();
-};
 
-function _logout() {
-    return fetch('https://qmetrix.autodesk.com/rest-logout/')
+export default class ProfileView extends Component {
+    constructor (props) {
+        super(props);
+        console.log(props);
+    }
+
+    logout(){
+        let that = this;
+        fetch('https://qmetrix.autodesk.com/rest-logout/')
         .then((response) => {
             if(response.ok){
-                Alert.alert('Logout Success, need to redirect');
-                return <LoginApp />;
+                that.props.navigator.replace({id:'login'});
             }
             else{
                 Alert.alert('Logout Fail');
@@ -34,9 +37,7 @@ function _logout() {
         .catch((error) => {
             console.error(error);
         });
-}
-
-export default class ProfileView extends Component {
+    }
 
     render() {
         return (
@@ -46,7 +47,7 @@ export default class ProfileView extends Component {
                 <Text style={styles.key}>EMail:{_loginState.userMail}</Text>
 
                 <Button
-                    onPress={_onPressLogout}
+                    onPress={this.logout.bind(this)}
                     title="Logout QMetrix"
                     color="#CC0000"
                     accessibilityLabel="Learn more about this purple button"

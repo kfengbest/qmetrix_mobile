@@ -33,6 +33,11 @@ class MyTabs extends React.Component {
     presses: 0,
   };
 
+    constructor (props) {
+        super(props);
+        console.log(props);
+    }
+
   _renderContent = (color: string, pageText: string, num?: number) => {
     return (
       <View style={[styles.tabContent, {backgroundColor: color}]}>
@@ -50,7 +55,7 @@ class MyTabs extends React.Component {
 
   _profileView = ()=>{
     return (
-      <ProfileView />
+      <ProfileView navigator={this.props.navigator}/>
     );
   }
 
