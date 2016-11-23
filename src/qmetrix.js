@@ -39,6 +39,11 @@ export default class MainView extends Component {
     }
 
     render () {
+
+            return (
+                <MainTabs />
+            );
+
         if(LoginApi.isLoggedIn()) {
             return (
                 <MainTabs />

@@ -8,6 +8,7 @@ import { NavigatorIOS, Text,StyleSheet } from 'react-native';
 
 import WidgetList from './widgetlist'
 import DashboardsList from './dashboardlist'
+import Portfolio from './portfolio'
 
 export default class Dashboard extends Component {
   _handleRightNavigationRequest() {

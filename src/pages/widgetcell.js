@@ -10,12 +10,16 @@ import {
 } from 'react-native';
 
 
-export default class WidgetView extends Component {
+export default class WidgetCell extends Component {
+
+  constructor() {
+    super();
+  }
 
   render() {
     return (
       <View>
-        <Text>Vidget item</Text>
+        <Text>{this.props.widget}</Text>
       </View>
     )
   }

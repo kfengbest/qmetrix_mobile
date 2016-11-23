@@ -12,10 +12,14 @@ import {
 
 export default class DashboardCell extends Component {
 
+  constructor() {
+    super();
+  }
+  
   render() {
     return (
       <View>
-        <Text>Vidget item</Text>
+        <Text>{this.props.dashboard}</Text>
       </View>
     )
   }

@@ -6,26 +6,36 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableHighlight
+    TouchableHighlight,
+    ListView
 } from 'react-native';
 
+import WidgetCell from './widgetcell'
 
 export default class WidgetList extends Component {
 
-  _onForward = () => {
-    this.props.navigator.push({
-      title: 'Scene ' + nextIndex,
-    });
+  constructor() {
+    super();
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows(['widget 1', 'widget 2', 'widget 3']),
+    };
+  }
+
+  _renderRow(data) {
+    return (
+     <WidgetCell 
+        widget={data}
+     />
+    );
   }
 
   render() {
     return (
-      <View>
-        <Text>Current Scene: { this.props.title }</Text>
-        <TouchableHighlight onPress={this._onForward}>
-          <Text>Tap me to load the next scene</Text>
-        </TouchableHighlight>
-      </View>
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={this._renderRow}
+      />
     )
   }
 }
