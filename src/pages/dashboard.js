@@ -6,16 +6,24 @@
 import React, { Component, PropTypes } from 'react';
 import { NavigatorIOS, Text,StyleSheet } from 'react-native';
 
+import EventEmitter from 'EventEmitter';
 import WidgetList from './widgetlist'
 import DashboardsList from './dashboardlist'
 import Portfolio from './portfolio'
 
 export default class Dashboard extends Component {
+
+  constructor(props){
+    super(props);
+    this.eventEmitter = new EventEmitter();
+  }
+
+  
   _handleRightNavigationRequest() {
     this.refs.nav.push({
       component: DashboardsList,
       title: 'Dashboards',
-      passProps: { myProp: 'Dashboards' },
+      passProps: { myProp: 'Dashboards', eventEmitter: this.eventEmitter, nav : this.refs.nav},
     });
   }
   
@@ -34,6 +42,7 @@ export default class Dashboard extends Component {
         style = {styles.container}
         initialRoute={{
           component: WidgetList,
+          passProps: {eventEmitter: this.eventEmitter},
           title: 'QMetrix',
           leftButtonTitle: 'portfolio',
           onLeftButtonPress: () => this._handleLeftNavigationRequest(),

@@ -22,6 +22,15 @@ export default class WidgetList extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.eventEmitter.addListener('dashboardChanged', this.handleDashboardChanged, this);
+  }
+
+  handleDashboardChanged(event){
+    console.log("dashboard changed, reload widgets...");
+    console.log(event);
+  }
+
   _renderRow(data) {
     return (
      <WidgetCell 

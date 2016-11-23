@@ -24,6 +24,8 @@ export default class DashboardsList extends Component {
 
   onCellSelected(data){
     console.log(data);
+    this.props.nav.pop();
+    this.props.eventEmitter.emit('dashboardChanged', {dashboard: data});
   }
 
   _renderRow(data) {

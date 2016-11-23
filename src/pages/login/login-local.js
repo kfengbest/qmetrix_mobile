@@ -44,6 +44,9 @@ export default class LoginApp extends Component {
         }).catch((error) => {
             console.log("login error: ", error);
         });
+
+        this.props.navigator.replace({id:'tabsview'});
+
     }
 
     render () {
