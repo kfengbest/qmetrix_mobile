@@ -37,16 +37,13 @@ export default class LoginApp extends Component {
                 console.log("login successful! welcome ", data.userDisplayName);
                 this.setState({loginOk: true});
 
-
+                this.props.navigator.replace({id:'tabsview'});
             } else {
                 console.log("login failed! check again please, ", data.userAccount);
             }
         }).catch((error) => {
             console.log("login error: ", error);
         });
-
-        this.props.navigator.replace({id:'tabsview'});
-
     }
 
     render () {
