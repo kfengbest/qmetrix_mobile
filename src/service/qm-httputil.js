@@ -15,7 +15,7 @@ function encodeParams (data) {
 }
 
 /**
- * common http wrapper for qmetrix api calls.
+ * common http wrapper for qmetrix api calls, return a Promise
  * @param method, the standard http methods
  * @param url, the api url to call
  * @param params, the parameters on the api call (in url)
@@ -70,6 +70,14 @@ function httpreq (method, url, params, data, callback, isFormData) {
 
 export default class HttpUtil {
 
+    /**
+     * GET JSON data, return a Promise
+     * @param url
+     * @param params
+     * @param data
+     * @param callback
+     * @returns {*}
+     */
     static get (url, params, data, callback) {
         return httpreq('get', url, params, data, callback, true);
     }

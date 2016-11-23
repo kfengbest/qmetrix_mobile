@@ -3,9 +3,13 @@
  * the login apis, states
  */
 
+import React from 'react'
+import {AsyncStorage} from 'react-native'
 import Global from './qm-global'
 import HttpUtil from './qm-httputil'
 
+const _dataKey = '@ActiveUserInfo';
+var _initialized = false;
 var _loginState = {
     isLogin: false, // change this to true to skip the login
     token: '',
@@ -26,8 +30,7 @@ export default class LoginApi {
                         _loginState.token = data.token;
                         _loginState.userAccount = username;
                         _loginState.userMail = data.mail;
-                        //TODO: persist the login state
-
+                        saveLoginState();
                         resolve(_loginState);
                     })
                     .catch((error) => {
@@ -41,7 +44,7 @@ export default class LoginApi {
         return _loginState.userDisplayName;
     }
 
-    static token() {
+    static token () {
         if(_loginState.isLogin) {
             return _loginState.token;
         }
@@ -56,21 +59,42 @@ export default class LoginApi {
             userAccount: '',
             userMail: ''
         };
-        //TODO: persist the login state
-
+        saveLoginState();
     }
 
-    static isLoggedIn() {
+    static async isLoggedIn () {
+        if (! _initialized) {
+            await initLogin();
+        }
         return _loginState.isLogin;
     }
 
 }
 
-function initLogin () {
-    //TODO: here maybe good to load stored login data
-    console.log("loading the persisted login states.");
+async function saveLoginState () {
+    try {
+        console.log("saving user state");
+        await
+        AsyncStorage.setItem(_dataKey, JSON.stringify(_loginState));
+    }
+    catch(error) {
+        console.log("error in saving user state:", error);
+    }
 
 }
 
-// load the login states from local storage
-initLogin();
+async function initLogin () {
+    console.log("loading the persisted login states.");
+    try {
+        let userData = await
+        AsyncStorage.getItem(_dataKey);
+        if(userData !== null) {
+            _loginState = JSON.parse(userData);
+            console.log("load ok:", userData);
+        }
+        _initialized = true;
+    }
+    catch(error) {
+        console.log("Error loading user data:", error);
+    }
+}
