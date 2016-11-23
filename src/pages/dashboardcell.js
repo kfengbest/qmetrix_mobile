@@ -19,7 +19,7 @@ export default class DashboardCell extends Component {
   render() {
     return (
       <TouchableHighlight
-          onPress={this.props.onPress}
+          onPress={this.props.onSelected}
       >
         <View>
           <Text>{this.props.dashboard}</Text>

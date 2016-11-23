@@ -14,31 +14,34 @@ import DashboardCell from './dashboardcell'
 
 export default class DashboardsList extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       dataSource: ds.cloneWithRows(['dashboard 1', 'dashboard 2', 'dashboard 3']),
     };
   }
 
-  _renderRow(data) {
+  onCellSelected(data){
+    console.log(data);
+  }
 
+  _renderRow(data) {
+    let that = this;
     return (
      <DashboardCell
-        onPress={() => {
-              console.log("onselected");
-        }}      
+        onSelected={this.onCellSelected.bind(this,data)}
         dashboard={data}
      />
     );
   }
 
   render() {
+    let that = this;
     return (
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
+        renderRow={this._renderRow.bind(this)}
       />
     )
   }
