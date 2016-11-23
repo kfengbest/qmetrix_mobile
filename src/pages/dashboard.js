@@ -40,7 +40,6 @@ export default class Dashboard extends Component {
           rightButtonTitle: 'dashboard',
           onRightButtonPress: () => this._handleRightNavigationRequest()
         }}
-        style={{flex: 1}}
       />
     );
   }
