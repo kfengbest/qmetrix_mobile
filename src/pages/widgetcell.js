@@ -21,7 +21,7 @@ export default class WidgetCell extends Component {
     return (
       <View style={styles.container}>
           <Text style={styles.title}>{this.props.widget}</Text>
-          <Image source={require('../.././img/chart-data.png')} style={{width: 350, height: 230}} />
+          <Image source={require('../.././img/chart-data.png')} style={styles.widget} />
       </View>
     )
   }
@@ -37,5 +37,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize:18,
         lineHeight: 50
+    },
+    widget: {
+        width: 350,
+        height: 230
     }
 });
