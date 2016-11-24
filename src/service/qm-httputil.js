@@ -9,9 +9,14 @@ import Global from './qm-global'
 import LoginApi from './qm-login'
 
 function encodeParams (data) {
-    return Object.keys(data).map(function (key) {
-        return [key, data[key]].map(encodeURIComponent).join("=");
-    }).join("&");
+    try {
+        return Object.keys(data).map(function (key) {
+            return [key, data[key]].map(encodeURIComponent).join("=");
+        }).join("&");
+    }
+    catch(e) {
+        return '';
+    }
 }
 
 /**

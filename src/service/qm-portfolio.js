@@ -7,17 +7,24 @@ import Global from './qm-global'
 import HttpUtil from './qm-httputil'
 
 var _pfoUrl = Global.baseAPIUrl() + 'v2/portfolio/';
+function getPortfolio (portfolioId) {
+    var url = _pfoUrl;
+    if(portfolioId) {
+        url += portfolioId;
+    }
+    return HttpUtil.get(url);
+}
+
 export default class PortfolioAPI {
-    static getAll() {
-
+    static getAll () {
+        return getPortfolio();
     }
 
-    static getById(portfolioId) {
-
+    static getById (portfolioId) {
+        return getPortfolio(portfolioId);
     }
 
-    static getByName(portfolioName) {
-
+    static getByName (portfolioName) {
+        return HttpUtil.get(_pfoUrl, {url_name: portfolioName});
     }
-
 }

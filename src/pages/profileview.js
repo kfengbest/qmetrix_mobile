@@ -12,7 +12,6 @@ import {
     Alert
 } from 'react-native';
 
-import httpreq from '../service/qm-httputil';
 import LoginApi from '../service/qm-login';
 
 

@@ -35,7 +35,6 @@ class MyTabs extends React.Component {
 
     constructor (props) {
         super(props);
-        console.log(props);
     }
 
   _renderContent = (color: string, pageText: string, num?: number) => {
