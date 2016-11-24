@@ -55,7 +55,7 @@ class MyTabs extends React.Component {
 
   _profileView = ()=>{
     return (
-      <ProfileView navigator={this.props.navigator}/>
+      <ProfileView navigator={this.props.navigator} />
     );
   }
 
