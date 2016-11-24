@@ -9,7 +9,8 @@ import { NavigatorIOS, Text,StyleSheet } from 'react-native';
 import EventEmitter from 'EventEmitter';
 import WidgetList from './widgetlist'
 import DashboardsList from './dashboardlist'
-import Portfolio from './portfolio'
+import PortfolioList from './portfoliolist'
+
 
 export default class Dashboard extends Component {
 
@@ -29,7 +30,7 @@ export default class Dashboard extends Component {
   
   _handleLeftNavigationRequest() {
     this.refs.nav.push({
-      component: Portfolio,
+      component: PortfolioList,
       title: 'portfolios',
       passProps: { myProp: 'portfolios' },
     });
