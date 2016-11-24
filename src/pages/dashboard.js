@@ -32,7 +32,7 @@ export default class Dashboard extends Component {
     this.refs.nav.push({
       component: PortfolioList,
       title: 'portfolios',
-      passProps: { myProp: 'portfolios' },
+      passProps: { myProp: 'portfolios', eventEmitter: this.eventEmitter, nav : this.refs.nav },
     });
   }
 

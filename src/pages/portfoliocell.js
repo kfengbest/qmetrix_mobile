@@ -22,7 +22,7 @@ export default class PortfolioCell extends Component {
           onPress={this.props.onSelected}
       >
         <View>
-          <Text>{this.props.portfolio}</Text>
+          <Text>{this.props.portfolio.name}</Text>
         </View>
       </TouchableHighlight>
     )

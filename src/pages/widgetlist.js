@@ -27,8 +27,18 @@ export default class WidgetList extends Component {
 
   componentDidMount() {
     this.props.eventEmitter.addListener('dashboardChanged', this.handleDashboardChanged, this);
-    this.reloadData();
+      this.props.eventEmitter.addListener('portfolioChanged', this.handlePortfolioChanged, this);
+
+      this.reloadData();
   }
+
+    handlePortfolioChanged(event){
+        console.log("portfolio changed, reload widgets...");
+        console.log(event);
+
+        this.setState({portfolio: event.portfolio});
+        this.reloadData();
+    }
 
   handleDashboardChanged(event){
     console.log("dashboard changed, reload widgets...");
