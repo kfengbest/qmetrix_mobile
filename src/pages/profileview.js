@@ -13,8 +13,8 @@ import {
 } from 'react-native';
 
 import httpreq from '../service/qm-httputil';
-import _loginState from '../service/qm-login';
-import LoginApp from '../pages/login/login-local';
+import LoginApi from '../service/qm-login';
+
 
 
 export default class ProfileView extends Component {
@@ -24,27 +24,17 @@ export default class ProfileView extends Component {
     }
 
     logout(){
-        let that = this;
-        fetch('https://qmetrix.autodesk.com/rest-logout/')
-        .then((response) => {
-            if(response.ok){
-                that.props.navigator.replace({id:'login'});
-            }
-            else{
-                Alert.alert('Logout Fail');
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+        LoginApi.logout().then(function(){
+            this.props.navigator.replace(this.props.navigator.props.initialRoute);
+        }.bind(this));
     }
 
     render() {
         return (
             <View>
-                <Text style={styles.title}>Profile:{_loginState.userDisplayName}</Text>
+                <Text style={styles.title}>Profile:{LoginApi.userName()}</Text>
                 <Text style={styles.key}>Full Name: </Text>
-                <Text style={styles.key}>EMail:{_loginState.userMail}</Text>
+                <Text style={styles.key}>EMail:{LoginApi.userMail()}</Text>
 
                 <Button
                     onPress={this.logout.bind(this)}

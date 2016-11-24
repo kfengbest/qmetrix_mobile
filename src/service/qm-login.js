@@ -44,6 +44,10 @@ export default class LoginApi {
         return _loginState.userDisplayName;
     }
 
+    static userMail () {
+        return _loginState.userMail;
+    }
+
     static token () {
         if(_loginState.isLogin) {
             return _loginState.token;
@@ -60,22 +64,36 @@ export default class LoginApi {
             userMail: ''
         };
         saveLoginState();
+
+        return new Promise(function (resolve, reject) {
+            //TODO: call the logout rest api
+            resolve(true);
+        });
     }
 
-    static async isLoggedIn () {
-        if (! _initialized) {
-            await initLogin();
+    /**
+     * return a promise
+     */
+    static isLoggedIn () {
+        if(_initialized) {
+            return new Promise(function (resolve, reject) {
+                resolve(_loginState.isLogin);
+            });
+        } else {
+            return new Promise(function (resolve, reject) {
+                initLogin().then(() => {
+                    resolve(_loginState.isLogin);
+                });
+            });
         }
-        return _loginState.isLogin;
     }
-
 }
 
 async function saveLoginState () {
     try {
         console.log("saving user state");
         await
-        AsyncStorage.setItem(_dataKey, JSON.stringify(_loginState));
+            AsyncStorage.setItem(_dataKey, JSON.stringify(_loginState));
     }
     catch(error) {
         console.log("error in saving user state:", error);
@@ -83,18 +101,22 @@ async function saveLoginState () {
 
 }
 
-async function initLogin () {
+function initLogin () {
     console.log("loading the persisted login states.");
-    try {
-        let userData = await
-        AsyncStorage.getItem(_dataKey);
-        if(userData !== null) {
-            _loginState = JSON.parse(userData);
-            console.log("load ok:", userData);
-        }
-        _initialized = true;
-    }
-    catch(error) {
-        console.log("Error loading user data:", error);
-    }
+    return new Promise(function (resolve, reject) {
+        AsyncStorage.getItem(_dataKey).then((userData) => {
+            if(userData !== null) {
+                _loginState = JSON.parse(userData);
+                console.log("load ok:", userData);
+            }
+            _initialized = true;
+            resolve(_initialized);
+
+        }).catch((error) => {
+            console.log("Error loading user data:", error);
+            _initialized = true;
+            resolve(_initialized);
+        });
+
+    });
 }
