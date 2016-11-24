@@ -17,8 +17,10 @@ export default class WidgetList extends Component {
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const samples = ['widget 1', 'widget 2', 'widget 3'];
     this.state = {
-      dataSource: ds.cloneWithRows(['widget 1', 'widget 2', 'widget 3']),
+      rowData : samples,
+      dataSource: ds.cloneWithRows(samples),
     };
   }
 
@@ -29,6 +31,19 @@ export default class WidgetList extends Component {
   handleDashboardChanged(event){
     console.log("dashboard changed, reload widgets...");
     console.log(event);
+
+    this.reloadData(event);
+  }
+
+  reloadData(dashboardId) {
+    // call rest api to fetch data.
+    let items = this.state.rowData;
+    items.push(dashboardId.dashboard);
+
+    this.setState({
+      rowData : items,
+      dataSource: this.state.dataSource.cloneWithRows(items)
+    });
   }
 
   _renderRow(data) {

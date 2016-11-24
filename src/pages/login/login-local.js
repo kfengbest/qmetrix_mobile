@@ -44,7 +44,6 @@ export default class LoginApp extends Component {
         }).catch((error) => {
             console.log("login error: ", error);
         });
-
     }
 
     render () {

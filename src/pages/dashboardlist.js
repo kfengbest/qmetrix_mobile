@@ -17,9 +17,22 @@ export default class DashboardsList extends Component {
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const samples = ['dashboard 1', 'dashboard 2', 'dashboard 3'];
     this.state = {
-      dataSource: ds.cloneWithRows(['dashboard 1', 'dashboard 2', 'dashboard 3']),
+      rowData : samples,
+      dataSource: ds.cloneWithRows(samples),
     };
+  }
+
+  reloadData(dashboardId) {
+    // call rest api to fetch data.
+    let items = this.state.rowData;
+    items.push(dashboardId);
+
+    this.setState({
+      rowData : items,
+      dataSource: this.state.dataSource.cloneWithRows(items)
+    });
   }
 
   onCellSelected(data){
