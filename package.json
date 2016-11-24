@@ -7,7 +7,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "highcharts": "^5.0.4",
     "react": "15.3.2",
+    "react-highcharts": "^11.0.0",
     "react-native": "0.37.0",
     "react-native-cookies": "~2"
   },
@@ -20,7 +22,7 @@
     "jest": "17.0.3",
     "jest-react-native": "17.0.3",
     "react-test-renderer": "15.3.2",
-    "react-native-css":"~1.2",
+    "react-native-css": "~1.2",
     "whatwg-fetch": "2.0.1"
   }
 }
