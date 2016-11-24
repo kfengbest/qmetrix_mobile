@@ -30,16 +30,16 @@ export default class ProfileView extends Component {
 
     render() {
         return (
-            <View>
-                <Text style={styles.title}>Profile:{LoginApi.userName()}</Text>
-                <Text style={styles.key}>Full Name: </Text>
-                <Text style={styles.key}>EMail:{LoginApi.userMail()}</Text>
-
+            <View style={{top:50}}>
+                <Text style={styles.title}>Profile</Text>
+                <Text style={styles.key}>Full Name: </Text><Text style={styles.label}>{LoginApi.userName()}</Text>
+                <Text></Text>
+                <Text style={styles.key}>EMail:</Text><Text style={styles.label}>{LoginApi.userMail()}</Text>
+                <Text></Text><Text></Text>
                 <Button
                     onPress={this.logout.bind(this)}
                     title="Logout QMetrix"
                     color="#CC0000"
-                    accessibilityLabel="Learn more about this purple button"
                 />
             </View>
 
@@ -52,9 +52,17 @@ const styles = StyleSheet.create({
         color: 'black',
         fontWeight: 'bold',
         fontSize: 22,
+        textAlign:'center',
     },
     key: {
         color: 'black',
         fontSize: 18,
+        left:5
     },
+    label: {
+        color: 'darkgray',
+        fontSize: 18,
+        left:5
+    }
+
 });
