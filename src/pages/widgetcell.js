@@ -6,7 +6,8 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableHighlight
+    TouchableHighlight,
+    Image
 } from 'react-native';
 
 
@@ -18,9 +19,23 @@ export default class WidgetCell extends Component {
 
   render() {
     return (
-      <View>
-        <Text>{this.props.widget}</Text>
+      <View style={styles.container}>
+          <Text style={styles.title}>{this.props.widget}</Text>
+          <Image source={require('../.././img/chart-data.png')} style={{width: 350, height: 230}} />
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#edeeee'
+    },
+    title: {
+        fontSize:18,
+        lineHeight: 50
+    }
+});
