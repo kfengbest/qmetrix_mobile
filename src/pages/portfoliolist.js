@@ -53,7 +53,7 @@ export default class PortfoliosList extends Component {
   componentWillMount () {
     PortfolioApi.getAll().then(function (data) {
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(data.portfolios)
+            dataSource: this.state.dataSource.cloneWithRows(data)
         });
         // this.setState(data.portfolios);
             // this.portfolios = data.portfolios;
