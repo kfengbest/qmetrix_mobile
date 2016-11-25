@@ -8,6 +8,7 @@ import {
     Text,
     View,
     TouchableHighlight,
+    RefreshControl,
     ListView
 } from 'react-native';
 
@@ -20,7 +21,7 @@ export default class DashboardsList extends Component {
         super(props);
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
-            rowData: [],
+            refreshing: false,
             dataSource: ds.cloneWithRows([]),
         };
         this.reloadData();
@@ -31,9 +32,9 @@ export default class DashboardsList extends Component {
         DashboardApi.getMine().then(function (data) {
             console.log("private dashboards:", data);
             this.setState({
-                rowData: data.dashboards,
-                dataSource: this.state.dataSource.cloneWithRows(data.dashboards)
+                dataSource: this.state.dataSource.cloneWithRows(data)
             });
+            this.setState({refreshing: false});
         }.bind(this)).catch((error) => {
             console.log("error in reload data:", error);
         });
@@ -55,6 +56,19 @@ export default class DashboardsList extends Component {
         );
     }
 
+    _onRefresh () {
+        this.setState({refreshing: true});
+        DashboardApi.getMine(true).then(function (data) {
+            console.log("private dashboards:", data);
+            this.setState({
+                dataSource: this.state.dataSource.cloneWithRows(data)
+            });
+            this.setState({refreshing: false});
+        }.bind(this)).catch((error) => {
+            console.log("error in reload data:", error);
+        });
+    }
+
     render () {
         let that = this;
         return (
@@ -62,6 +76,12 @@ export default class DashboardsList extends Component {
                 enableEmptySections={true}
                 dataSource={this.state.dataSource}
                 renderRow={this._renderRow.bind(this)}
+                refreshControl={
+                    <RefreshControl
+                    refreshing={this.state.refreshing}
+                    onRefresh={this._onRefresh.bind(this)}
+                    />
+                }
             />
         )
     }
