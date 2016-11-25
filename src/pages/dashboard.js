@@ -23,16 +23,16 @@ export default class Dashboard extends Component {
   _handleRightNavigationRequest() {
     this.refs.nav.push({
       component: DashboardsList,
-      title: 'Dashboards',
-      passProps: { myProp: 'Dashboards', eventEmitter: this.eventEmitter, nav : this.refs.nav},
+      title: 'My Dashboards',
+      passProps: { myProp: 'My Dashboards', eventEmitter: this.eventEmitter, nav : this.refs.nav},
     });
   }
   
   _handleLeftNavigationRequest() {
     this.refs.nav.push({
       component: PortfolioList,
-      title: 'portfolios',
-      passProps: { myProp: 'portfolios', eventEmitter: this.eventEmitter, nav : this.refs.nav },
+      title: 'Portfolios',
+      passProps: { myProp: 'Portfolios', eventEmitter: this.eventEmitter, nav : this.refs.nav },
     });
   }
 
@@ -44,10 +44,10 @@ export default class Dashboard extends Component {
         initialRoute={{
           component: WidgetList,
           passProps: {eventEmitter: this.eventEmitter},
-          title: 'QMetrix',
-          leftButtonTitle: 'portfolio',
+          title: 'Home',
+          leftButtonTitle: 'Portfolio',
           onLeftButtonPress: () => this._handleLeftNavigationRequest(),
-          rightButtonTitle: 'dashboard',
+          rightButtonTitle: 'My Dashboards',
           onRightButtonPress: () => this._handleRightNavigationRequest()
         }}
       />
