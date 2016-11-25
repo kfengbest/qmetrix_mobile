@@ -24,7 +24,7 @@ export default class DashboardsList extends Component {
             refreshing: false,
             dataSource: ds.cloneWithRows([]),
         };
-        this.reloadData();
+
     }
 
     reloadData () {
@@ -40,6 +40,10 @@ export default class DashboardsList extends Component {
         });
     }
 
+    componentDidMount() {
+        this.reloadData();
+    }
+
     onCellSelected (data) {
         console.log(data);
         this.props.nav.pop();
@@ -47,7 +51,6 @@ export default class DashboardsList extends Component {
     }
 
     _renderRow (data) {
-        let that = this;
         return (
             <DashboardCell
                 onSelected={this.onCellSelected.bind(this, data)}
