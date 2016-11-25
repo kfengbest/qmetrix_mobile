@@ -23,7 +23,9 @@ export default class LoginApp extends Component {
         this.userHint = 'Autodesk Domain Account';
         this.passHint = 'Password';
         this.state = {
+            loginInProgress: false,
             loginOk: false,
+            loginError: "",
             user: '',
             password: ''
         }
@@ -32,17 +34,30 @@ export default class LoginApp extends Component {
     onLoginBtnClick () {
 
         console.log("logout pressed!");
+        this.setState({loginInProgress: true});
         LoginApi.login(this.state.user, this.state.password).then((data) => {
             if(data.isLogin) {
                 console.log("login successful! welcome ", data.userDisplayName);
-                this.setState({loginOk: true});
+                this.setState({loginOk: true, loginError: ""});
 
                 this.props.navigator.replace(this.props.goto);
             } else {
+                this.setState({
+                    loginOk: false,
+                    loginError: "login failed! check again please"
+                });
                 console.log("login failed! check again please, ", data.userAccount);
             }
+            this.setState({loginInProgress: false});
         }).catch((error) => {
             console.log("login error: ", error);
+            this.setState({});
+            this.setState({
+                loginOk: false,
+                loginError: "login failed! check again please",
+                loginInProgress: false
+            });
+            console.log("login failed! check again please, ", data.userAccount);
         });
     }
 
@@ -67,6 +82,7 @@ export default class LoginApp extends Component {
                     </View>
                     <TextInput
                         style={styles.input}
+                        autoCapitalize="none"
                         placeholder={this.userHint}
                         onChangeText={(text) => this.setState({user: text})}
                         value={this.state.user}
@@ -90,7 +106,5 @@ export default class LoginApp extends Component {
             </View>
         );
     }
-
-    // }
 }
 

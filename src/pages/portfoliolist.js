@@ -64,6 +64,7 @@ export default class PortfoliosList extends Component {
     render() {
         return (
             <ListView
+                enableEmptySections={true}
                 dataSource={this.state.dataSource}
                 renderRow={this._renderRow.bind(this)}
                 refreshControl={

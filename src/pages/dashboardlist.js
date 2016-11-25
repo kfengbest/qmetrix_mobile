@@ -1,5 +1,6 @@
 /**
  * Created by kaven on 22/11/2016.
+ * this is the private dashboard list
  */
 import React, { Component } from 'react';
 import {
@@ -10,6 +11,7 @@ import {
     ListView
 } from 'react-native';
 
+import DashboardApi from '../service/qm-dashboard'
 import DashboardCell from './dashboardcell'
 
 export default class DashboardsList extends Component {
@@ -26,6 +28,7 @@ export default class DashboardsList extends Component {
 
   reloadData(dashboardId) {
     // call rest api to fetch data.
+    DashboardApi.getById(dashboardId).then
     let items = this.state.rowData;
     items.push(dashboardId);
 

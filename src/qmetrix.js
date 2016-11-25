@@ -8,19 +8,15 @@ import {
     StyleSheet,
     Text,
     View,
-    Button,
     Navigator
 } from 'react-native'
-// import CookieManager from 'react-native-cookies'
-// import LoginApp from './pages/login/loginapp'
 import LoginApp from './pages/login/login-local'
 import MainTabs from './maintabs'
-import LoginApi from './service/qm-login'
 
 const _navIDs = {
     login: {id: 0},
-    tabsview: {id:1}
-}
+    tabsview: {id: 1}
+};
 
 export default class MainView extends Component {
     constructor (props) {
@@ -39,7 +35,9 @@ export default class MainView extends Component {
                     <MainTabs navigator={nav}/>
                 );
             default:
-                return (<View />);
+                return (<View>
+                    <Text>Oops, something went wrong, you shouldn't be here.</Text>
+                </View>);
         }
     }
 
@@ -47,6 +45,7 @@ export default class MainView extends Component {
         return (
             <Navigator
                 initialRoute={_navIDs.login}
+                /*initialRoute = {{id:3}}*/
                 renderScene={this.router}
             />
         );
