@@ -107,7 +107,7 @@ function initLogin () {
         AsyncStorage.getItem(_dataKey).then((userData) => {
             if(userData !== null) {
                 _loginState = JSON.parse(userData);
-                console.log("load ok:", userData);
+                console.log("load userinfo ok:", userData);
             }
             _initialized = true;
             resolve(_initialized);

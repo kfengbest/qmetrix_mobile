@@ -2,7 +2,7 @@
  * Created by kaven on 22/11/2016.
  * this is the private dashboard list
  */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
@@ -16,51 +16,53 @@ import DashboardCell from './dashboardcell'
 
 export default class DashboardsList extends Component {
 
-  constructor(props) {
-    super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    const samples = ['dashboard 1', 'dashboard 2', 'dashboard 3'];
-    this.state = {
-      rowData : samples,
-      dataSource: ds.cloneWithRows(samples),
-    };
-  }
+    constructor (props) {
+        super(props);
+        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = {
+            rowData: [],
+            dataSource: ds.cloneWithRows([]),
+        };
+        this.reloadData();
+    }
 
-  reloadData(dashboardId) {
-    // call rest api to fetch data.
-    DashboardApi.getById(dashboardId).then
-    let items = this.state.rowData;
-    items.push(dashboardId);
+    reloadData () {
+        // call rest api to fetch data.
+        DashboardApi.getMine().then(function (data) {
+            console.log("private dashboards:", data);
+            this.setState({
+                rowData: data.dashboards,
+                dataSource: this.state.dataSource.cloneWithRows(data.dashboards)
+            });
+        }.bind(this)).catch((error) => {
+            console.log("error in reload data:", error);
+        });
+    }
 
-    this.setState({
-      rowData : items,
-      dataSource: this.state.dataSource.cloneWithRows(items)
-    });
-  }
+    onCellSelected (data) {
+        console.log(data);
+        this.props.nav.pop();
+        this.props.eventEmitter.emit('dashboardChanged', {dashboard: data});
+    }
 
-  onCellSelected(data){
-    console.log(data);
-    this.props.nav.pop();
-    this.props.eventEmitter.emit('dashboardChanged', {dashboard: data});
-  }
+    _renderRow (data) {
+        let that = this;
+        return (
+            <DashboardCell
+                onSelected={this.onCellSelected.bind(this, data)}
+                dashboard={data}
+            />
+        );
+    }
 
-  _renderRow(data) {
-    let that = this;
-    return (
-     <DashboardCell
-        onSelected={this.onCellSelected.bind(this,data)}
-        dashboard={data}
-     />
-    );
-  }
-
-  render() {
-    let that = this;
-    return (
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={this._renderRow.bind(this)}
-      />
-    )
-  }
+    render () {
+        let that = this;
+        return (
+            <ListView
+                enableEmptySections={true}
+                dataSource={this.state.dataSource}
+                renderRow={this._renderRow.bind(this)}
+            />
+        )
+    }
 }

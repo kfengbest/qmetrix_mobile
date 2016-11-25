@@ -41,8 +41,7 @@ export default class WidgetList extends Component {
     }
 
   handleDashboardChanged(event){
-    console.log("dashboard changed, reload widgets...");
-    console.log(event);
+    console.log("dashboard changed, reload widgets...", event);
 
     this.setState({dashboardId: event.dashboard});
     this.reloadData();
