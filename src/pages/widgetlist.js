@@ -16,12 +16,12 @@ import WidgetCell from './widgetcell'
 
 export default class WidgetList extends Component {
 
-    constructor () {
-        super();
+    constructor (props) {
+        super(props);
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.curPortfolio = null;
+        this.curDashboard = null;
         this.state = {
-            dashboard:null,
-            dashboardId: "",
             rowData: [],
             dataSource: ds.cloneWithRows([]),
         };
@@ -34,26 +34,26 @@ export default class WidgetList extends Component {
 
     handlePortfolioChanged (event) {
         console.log("portfolio changed, load the portfolio dashboards, then load the default dashboard", event);
-        this.setState({portfolio: event.portfolio});
+        this.curPortfolio =  event.portfolio;
         this.reloadPortfolio();
     }
 
     handleDashboardChanged (event) {
         console.log("dashboard changed, reload widgets...", event);
 
-        this.setState({dashboard: event.dashboard});
+        this.curDashboard = event.dashboard;
         this.reloadDashboard();
     }
 
     reloadPortfolio () {
-        if(this.state.portfolio._id) {
-            DashboardApi.getPortfolioDashboards(this.state.portfolio._id)
+        if(this.curPortfolio._id) {
+            DashboardApi.getPortfolioDashboards(this.curPortfolio._id)
                         .then(function (data) {
                             console.log("portfolio dashboards:", data);
                             if(Global.isDefined(data.default)) {
-                                this.setState({dashboard:data.default})
+                                this.curDashboard = data.default;
                             } else {
-                                this.setState({dashboard: data.dashboards[0]});
+                                this.curDashboard = data.dashboards[0];
                             }
                             this.reloadDashboard();
                         }.bind(this))
@@ -66,8 +66,8 @@ export default class WidgetList extends Component {
     }
 
     reloadDashboard () {
-        if(this.state.dashboard) {
-            WidgetApi.getWidgetsOfDashboard(this.state.dashboard._id)
+        if(this.curDashboard) {
+            WidgetApi.getWidgetsOfDashboard(this.curDashboard._id)
                      .then(function (data) {
                          console.log("dashboard widgets:", data);
                          this.setState({
@@ -83,7 +83,7 @@ export default class WidgetList extends Component {
 
     _renderRow (data) {
         return (
-            <WidgetCell
+            <WidgetCell key={data.title + data.type}
                 widget={data}
             />
         );

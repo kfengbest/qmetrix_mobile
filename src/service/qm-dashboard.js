@@ -17,24 +17,24 @@ function getDashboard (dashboardId, forceUpdate) {
     if(dashboardId) {
         url += dashboardId;
     }
-    // return HttpUtil.get(url);
-    return new Promise(function (resolve, reject) {
-        AsyncStorage.getItem(_dataKey).then((data) => {
-            if (data !== null && forceUpdate !== true) {
-                let portfolios_data = JSON.parse(data);
-                resolve(portfolios_data.dashboards);
-            } else {
-                HttpUtil.get(url).then((data) => {
-                    _saveDashboardsToCache(data);
-                    resolve(data.dashboards);
-                }).catch((error) => {
-                    reject(error);
-                });
-            }
-        }).catch((error) => {
-            console.log("Error loading dashboards:", error);
-        });
-    })
+    return HttpUtil.get(url);
+    // return new Promise(function (resolve, reject) {
+    //     AsyncStorage.getItem(_dataKey).then((data) => {
+    //         if (data !== null && forceUpdate !== true) {
+    //             let portfolios_data = JSON.parse(data);
+    //             resolve(portfolios_data.dashboards);
+    //         } else {
+    //             HttpUtil.get(url).then((data) => {
+    //                 _saveDashboardsToCache(data);
+    //                 resolve(data.dashboards);
+    //             }).catch((error) => {
+    //                 reject(error);
+    //             });
+    //         }
+    //     }).catch((error) => {
+    //         console.log("Error loading dashboards:", error);
+    //     });
+    // })
 }
 
 async function _saveDashboardsToCache(data) {

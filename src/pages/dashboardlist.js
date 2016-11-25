@@ -32,9 +32,9 @@ export default class DashboardsList extends Component {
         DashboardApi.getMine().then(function (data) {
             console.log("private dashboards:", data);
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(data)
+                refreshing: false,
+                dataSource: this.state.dataSource.cloneWithRows(data.dashboards)
             });
-            this.setState({refreshing: false});
         }.bind(this)).catch((error) => {
             console.log("error in reload data:", error);
         });
@@ -61,16 +61,15 @@ export default class DashboardsList extends Component {
         DashboardApi.getMine(true).then(function (data) {
             console.log("private dashboards:", data);
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(data)
+                refreshing: false,
+                dataSource: this.state.dataSource.cloneWithRows(data.dashboards)
             });
-            this.setState({refreshing: false});
         }.bind(this)).catch((error) => {
             console.log("error in reload data:", error);
         });
     }
 
     render () {
-        let that = this;
         return (
             <ListView
                 enableEmptySections={true}
