@@ -15,6 +15,10 @@ export default class Global {
     static isNullOrUndefined (obj) {
         return obj === undefined || obj === null;
     }
+
+    static isDefined(obj) {
+        return ! this.isNullOrUndefined(obj);
+    }
     static isFunction(obj) {
         return typeof obj == 'function';
     }

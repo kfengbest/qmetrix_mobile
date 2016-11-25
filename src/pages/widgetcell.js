@@ -13,14 +13,15 @@ import {
 
 export default class WidgetCell extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.widget = props.widget;
   }
 
   render() {
     return (
       <View style={styles.container}>
-          <Text style={styles.title}>{this.props.widget}</Text>
+          <Text style={styles.title}>{this.widget.title}</Text>
           <Image source={require('../.././img/chart-data.png')} style={styles.widget} />
       </View>
     )
