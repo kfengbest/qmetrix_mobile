@@ -12,7 +12,6 @@ import {
     View
 } from 'react-native';
 
-import MainView from '../../qmetrix'
 import LoginApi from '../../service/qm-login'
 
 var styles = require('./style.js');
@@ -38,20 +37,19 @@ export default class LoginApp extends Component {
         LoginApi.login(this.state.user, this.state.password).then((data) => {
             if(data.isLogin) {
                 console.log("login successful! welcome ", data.userDisplayName);
-                this.setState({loginOk: true, loginError: ""});
+                this.setState({loginOk: true, loginError: "",loginInProgress: false});
 
                 this.props.navigator.replace(this.props.goto);
             } else {
                 this.setState({
                     loginOk: false,
+                    loginInProgress: false,
                     loginError: "login failed! check again please"
                 });
                 console.log("login failed! check again please, ", data.userAccount);
             }
-            this.setState({loginInProgress: false});
         }).catch((error) => {
             console.log("login error: ", error);
-            this.setState({});
             this.setState({
                 loginOk: false,
                 loginError: "login failed! check again please",

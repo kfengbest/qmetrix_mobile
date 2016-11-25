@@ -45,7 +45,8 @@ function httpreq (method, url, params, data, callback, isFormData) {
     if(token) {
         paramsLocal._xt_ = token;
     }
-    cfg.url = url + (url.indexOf("?") < 0 ? "?" : "&") + encodeParams(paramsLocal);
+    let urlParams = encodeParams(paramsLocal);
+    cfg.url = url + (urlParams ? ((url.indexOf("?") < 0 ? "?" : "&") + urlParams) : "");
 
     return new Promise(function (resolve, reject) {
         fetch(cfg.url, cfg)
